@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "e10042ce-f7cd-4c01-be01-0effc1b74752",
+		"name": "api/image_desc_en",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "desc_en",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"path\": \"shared_files/<image_name>.jpeg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:16000/api/image_desc_en",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "16000",
+					"path": [
+						"api",
+						"image_desc_en"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

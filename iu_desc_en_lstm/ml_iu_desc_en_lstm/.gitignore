@@ -1,0 +1,11 @@
+data/annotations
+data/train2014
+data/val2014
+models/encoder.pkl
+models/decoder.pkl
+data/train2014
+data/val2014
+data/
+weights/
+.ipynb_checkpoints
+__pycache__

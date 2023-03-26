@@ -1,0 +1,15 @@
+#!/bin/sh
+
+read_var() {
+    VAR=$(grep $1 $2 | xargs)
+    IFS="=" read -ra VAR <<< "$VAR"
+    echo ${VAR[1]}
+}
+
+PREDTRAINED_VERSION=$(read_var PRETRAINED_FASTERRCNN_VERSION .env)
+PREDTRAINED_DOWNLOAD_URL=$(read_var PREDTRAINED_FILE_DOWNLOAD_URL .env)
+PREDTRAINED_FILENAME=$(read_var PREDTRAINED_FILENAME .env)
+
+mkdir -p -v $PWD/artifacts/predtrained/$PREDTRAINED_VERSION
+#wget -O $PWD/artifacts/predtrained/$PREDTRAINED_VERSION/$PREDTRAINED_FILENAME $PREDTRAINED_DOWNLOAD_URL
+curl -L -o $PWD/artifacts/predtrained/$PREDTRAINED_VERSION/$PREDTRAINED_FILENAME $PREDTRAINED_DOWNLOAD_URL

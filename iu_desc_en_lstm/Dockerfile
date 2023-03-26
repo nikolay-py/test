@@ -1,0 +1,33 @@
+FROM nvidia/cuda:10.0-base
+# FROM nvidia/cuda-arm64:11.0-base
+
+RUN apt-get update
+RUN apt-get -y install software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+
+RUN apt-get install -y gcc
+
+RUN apt-get install -y --no-install-recommends \
+    python3.9 \
+    python3.9-distutils \
+    python3.9-dev
+
+RUN apt-get install -y wget
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python3.9 get-pip.py
+
+RUN pip3.9 install -U pip
+RUN pip3.9 install -U setuptools
+
+RUN ln -s /usr/bin/python3.9 /usr/bin/python
+RUN ln -s /usr/bin/pip3.9 /usr/bin/pip
+
+WORKDIR /iu_desc_en_lstm
+
+COPY . .
+RUN --mount=type=cache,target=/root/.cache \
+    pip install -r requirements/development.txt
+
+ENV APP_SETTINGS=init_config.DevelopmentConfig
+
+ENTRYPOINT ["bash", "run_app.sh"]

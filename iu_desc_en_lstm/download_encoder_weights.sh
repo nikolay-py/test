@@ -1,0 +1,15 @@
+#!/bin/sh
+
+read_var() {
+    VAR=$(grep $1 $2 | xargs)
+    IFS="=" read -ra VAR <<< "$VAR"
+    echo ${VAR[1]}
+}
+
+WEIGHTS_VERSION=$(read_var WEIGHTS_VERSION .env)
+ENCODER_WEIGHTS_DOWNLOAD_URL=$(read_var ENCODER_WEIGHTS_DOWNLOAD_URL .env)
+ENCODER_WEIGHTS_FILENAME=$(read_var ENCODER_WEIGHTS_FILENAME .env)
+
+mkdir -p -v $PWD/artifacts/weights/$WEIGHTS_VERSION
+#wget -O $PWD/artifacts/weights/$WEIGHTS_VERSION/$ENCODER_WEIGHTS_FILENAME $ENCODER_WEIGHTS_DOWNLOAD_URL
+curl -L -o $PWD/artifacts/weights/$WEIGHTS_VERSION/$ENCODER_WEIGHTS_FILENAME $ENCODER_WEIGHTS_DOWNLOAD_URL
